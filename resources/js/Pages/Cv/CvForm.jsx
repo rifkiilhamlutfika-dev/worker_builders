@@ -1,37 +1,72 @@
 import PageLayout from "@/components/modules/PageLayout";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import UserForm from "./modules/form/UserForm";
+import Progres from "./modules/form/Progres";
+import { useState } from "react";
+import AboutMe from "./modules/form/AboutMe";
+import Educational from "./modules/form/EducationalForm";
+import Experience from "./modules/form/Experience";
+import Skill from "./modules/form/Skill";
+import SocialMedia from "./modules/form/SocialMedia";
+import CourseTraining from "./modules/form/CourseTraining";
 
 export default function CvForm() {
+    const [progres, setProgres] = useState(1);
+    const [dataForm, setDataForm] = useState([
+        {
+            progres: 1,
+            completed: false,
+        },
+        {
+            progres: 2,
+            completed: false,
+        },
+        {
+            progres: 3,
+            completed: false,
+        },
+        {
+            progres: 4,
+            completed: false,
+        },
+        {
+            progres: 5,
+            completed: false,
+        },
+        {
+            progres: 6,
+            completed: false,
+        },
+        {
+            progres: 7,
+            completed: false,
+        },
+        {
+            progres: 8,
+            completed: false,
+        },
+    ]);
+
+    const handleChangeStatus = (index) => {
+        setDataForm((prev) => (prev[index].completed = true));
+    };
+
     return (
         <PageLayout pageName="CV Form">
-            <form>
-                <div className="flex items-center gap-3">
-                    <div className="w-full">
-                        <Label htmlFor="firstName" className="mb-2">
-                            First Name
-                        </Label>
-                        <Input
-                            className=""
-                            id="firstName"
-                            placeholder="First Name..."
-                            type="text"
-                        />
-                    </div>
+            <Progres setProgres={setProgres} />
 
-                    <div className="w-full">
-                        <Label htmlFor="lastName" className="mb-2">
-                            Last Name
-                        </Label>
-                        <Input
-                            className=""
-                            id="lastName"
-                            placeholder="Last Name..."
-                            type="text"
-                        />
-                    </div>
-                </div>
-            </form>
+            {progres == 1 && (
+                <UserForm
+                    nextStep={setProgres}
+                    completed={handleChangeStatus}
+                />
+            )}
+            {progres == 2 && <AboutMe />}
+            {progres == 3 && <Educational />}
+            {progres == 4 && <Experience />}
+            {progres == 5 && <Skill />}
+            {progres == 6 && <CourseTraining />}
+            {progres == 7 && <SocialMedia />}
+            {progres == 8 && <UserForm />}
         </PageLayout>
     );
 }
