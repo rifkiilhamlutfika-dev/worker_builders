@@ -21,6 +21,7 @@ class CvSeeder extends Seeder
         Cv::create([
             'user_id' => $user->id,
             'template_id' => $templateCv->id,
+            'career_objective' => "Frontend Developer"
         ]);
     }
 }

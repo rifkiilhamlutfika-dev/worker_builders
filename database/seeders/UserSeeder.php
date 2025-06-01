@@ -24,7 +24,10 @@ class UserSeeder extends Seeder
             'address' => $faker->address,
             'gender' => 'male',
             'phone' => $faker->phoneNumber,
-            'country' => $faker->country
+            'city' => $faker->city,
+            'country' => $faker->country,
+            'place_of_birth' => $faker->country,
+            'date_of_birth' => $faker->date
         ]);
 
         User::create([
@@ -35,7 +38,10 @@ class UserSeeder extends Seeder
             'address' => $faker->address,
             'gender' => 'female',
             'phone' => $faker->phoneNumber,
-            'country' => $faker->country
+            'city' => $faker->city,
+            'country' => $faker->country,
+            'place_of_birth' => $faker->country,
+            'date_of_birth' => $faker->date
         ]);
 
         User::create([
@@ -46,7 +52,10 @@ class UserSeeder extends Seeder
             'address' => $faker->address,
             'gender' => null,
             'phone' => $faker->phoneNumber,
-            'country' => $faker->country
+            'city' => $faker->city,
+            'country' => $faker->country,
+            'place_of_birth' => $faker->country,
+            'date_of_birth' => $faker->date
         ]);
     }
 }

@@ -11,62 +11,26 @@ import CourseTraining from "./modules/form/CourseTraining";
 
 export default function CvForm() {
     const [progres, setProgres] = useState(1);
-    const [dataForm, setDataForm] = useState([
-        {
-            progres: 1,
-            completed: false,
-        },
-        {
-            progres: 2,
-            completed: false,
-        },
-        {
-            progres: 3,
-            completed: false,
-        },
-        {
-            progres: 4,
-            completed: false,
-        },
-        {
-            progres: 5,
-            completed: false,
-        },
-        {
-            progres: 6,
-            completed: false,
-        },
-        {
-            progres: 7,
-            completed: false,
-        },
-        {
-            progres: 8,
-            completed: false,
-        },
-    ]);
-
-    const handleChangeStatus = (index) => {
-        setDataForm((prev) => (prev[index].completed = true));
-    };
+    const [position, setPosition] = useState(1);
 
     return (
         <PageLayout pageName="CV Form">
-            <Progres setProgres={setProgres} />
+            <Progres
+                setPosition={setPosition}
+                dataProgres={progres}
+                position={position}
+            />
 
-            {progres == 1 && (
-                <UserForm
-                    nextStep={setProgres}
-                    completed={handleChangeStatus}
-                />
+            {position == 1 && (
+                <UserForm nextStep={setProgres} position={setPosition} />
             )}
-            {progres == 2 && <AboutMe />}
-            {progres == 3 && <Educational />}
-            {progres == 4 && <Experience />}
-            {progres == 5 && <Skill />}
-            {progres == 6 && <CourseTraining />}
-            {progres == 7 && <SocialMedia />}
-            {progres == 8 && <UserForm />}
+            {position == 2 && <AboutMe />}
+            {position == 3 && <Educational />}
+            {position == 4 && <Experience />}
+            {position == 5 && <Skill />}
+            {position == 6 && <CourseTraining />}
+            {position == 7 && <SocialMedia />}
+            {position == 8 && <UserForm />}
         </PageLayout>
     );
 }

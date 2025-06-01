@@ -1,3 +1,4 @@
+import { Toaster } from "sonner";
 import { AppSidebar } from "../app-sidebar";
 import {
     Breadcrumb,
@@ -11,6 +12,7 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from "../ui/sidebar";
 export default function PageLayout({ children, pageName }) {
     return (
         <>
+            <Toaster position="top-right" />
             <SidebarProvider>
                 <AppSidebar />
                 <SidebarInset>
