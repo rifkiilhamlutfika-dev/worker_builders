@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export default function Educational() {
     return (
-        <div className="pt-20 pb-10">
+        <div className="pb-10">
             <h2 className="font-semibold pb-5">Educational</h2>
 
             <Button className="bg-transparent mb-3 text-xs p-0 hover:bg-transparent text-black shadow-transparent">

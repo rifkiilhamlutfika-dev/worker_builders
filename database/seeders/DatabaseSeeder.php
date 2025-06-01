@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             ExperienceSeeder::class,
             EducationalSeeder::class,
             CvSeeder::class,
-            CourseTrainingSeeder::class
+            CourseTrainingSeeder::class,
+            SummarySeeder::class
         ]);
     }
 }

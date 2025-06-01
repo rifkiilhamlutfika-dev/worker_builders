@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Summary;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -44,26 +45,61 @@ class CvController extends Controller
             'gender' => 'string|max:6|nullable'
         ]);
 
+        if ($validate->fails()) return back()->withErrors($validate)->withInput();
+
+        // $user = User::first('id');
+
+        // User::where('id', $user->id)->update([
+        //     'first_name' => $request->firstName,
+        //     'last_name' => $request->lastName,
+        //     'email' => $request->email,
+        //     'phone' => $request->phone,
+        //     'city' => $request->city,
+        //     'country' => $request->country,
+        //     'place_of_birth' => $request->placeOfBirth,
+        //     'date_of_birth' => $request->dateOfBirth,
+        //     'address' => $request->address,
+        //     'gender' => $request->gender,
+        //     'updated_at' => now()
+        // ]);
+
+        session([
+            'form_cv_user' => $request->all()
+        ]);
+
+        return back()->with('succes', true);
+    }
+
+    public function summaryForm(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'summary' => 'required|string',
+        ]);
+
+        if ($validate->fails()) return back()->withErrors($validate)->withInput();
+
+        session([
+            'form_cv_summary' => $request->summary
+        ]);
+
+        return back();
+    }
+
+    public function educationalForm(Request $request)
+    {
+
+        $validate = Validator::make($request->all(), [
+            'summary' => 'required|string',
+        ]);
+
         if ($validate->fails()) {
             return back()->withErrors($validate)->withInput();
         }
 
-        $user = User::first('id');
-
-        User::where('id', $user->id)->update([
-            'first_name' => $request->firstName,
-            'last_name' => $request->lastName,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'city' => $request->city,
-            'country' => $request->country,
-            'place_of_birth' => $request->placeOfBirth,
-            'date_of_birth' => $request->dateOfBirth,
-            'address' => $request->address,
-            'gender' => $request->gender,
-            'updated_at' => now()
+        session([
+            'form_cv_summary' => $request->summary
         ]);
 
-        return back()->with('succes', true);
+        return back();
     }
 }
