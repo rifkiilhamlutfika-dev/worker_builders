@@ -12,10 +12,23 @@ class CvController extends Controller
 {
     public function cvForm()
     {
-        $user = User::first();
+        $user = session('form_cv_user');
+        $userData = User::first();
+        // $user = $userData->only(
+        //     'first_name',
+        //     'last_name',
+        //     'email',
+        //     'phone',
+        //     'address',
+        //     'gender',
+        //     'country',
+        //     'city',
+        //     'place_of_birth',
+        //     'date_of_birth'
+        // );
 
-        return Inertia::render('Cv/CvForm', [
-            'user' => $user->only(
+        if (session('form_cv_user') == null) {
+            $user = $userData->only(
                 'first_name',
                 'last_name',
                 'email',
@@ -26,21 +39,38 @@ class CvController extends Controller
                 'city',
                 'place_of_birth',
                 'date_of_birth'
-            )
+            );
+        }
+
+        $summary = session("form_cv_summary");
+        $education = session('form_cv_education');
+        $experience = session("form_cv_experince");
+        $skill = session("form_cv_skill");
+        $courseTraining = session("form_cv_course_training");
+        $socialMedia = session("socialMediaForm");
+
+        return Inertia::render('Cv/CvForm', [
+            "user" => $user,
+            "summary" => $summary,
+            "education" => $education,
+            "experience" => $experience,
+            "skill" => $skill,
+            "course_training" => $courseTraining,
+            "social_media" => $socialMedia
         ]);
     }
 
     public function userUpdate(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'firstName' => 'required|string|max:255',
-            'lastName' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'country' => 'required|string|max:255',
-            'placeOfBirth' => 'string|max:255|nullable',
-            'dateOfBirth' => 'date|max:255|nullable',
+            'place_of_birth' => 'string|max:255|nullable',
+            'date_of_birth' => 'date|max:255|nullable',
             'address' => 'string|nullable',
             'gender' => 'string|max:6|nullable'
         ]);

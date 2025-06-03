@@ -18,16 +18,16 @@ export default function UserForm({ nextStep, position }) {
     const { user } = usePage().props;
     const [disabled, setDisabled] = useState(true);
     const [formData, setFormData] = useState({
-        firstName: user.first_name,
-        lastName: user.last_name,
+        first_name: user.first_name,
+        last_name: user.last_name,
         email: user.email,
         phone: user.phone,
         gender: user.gender,
         country: user.country,
         city: user.city,
         address: user.address,
-        placeOfBirth: user.place_of_birth,
-        dateOfBirth: user.date_of_birth,
+        place_of_birth: user.place_of_birth,
+        date_of_birth: user.date_of_birth,
     });
 
     const handleChangeForm = (e) => {
@@ -45,13 +45,13 @@ export default function UserForm({ nextStep, position }) {
     };
 
     const requiredFields = [
-        "firstName",
-        "lastName",
+        "first_name",
+        "last_name",
         "email",
         "phone",
         "city",
         "country",
-        "dateOfBirth",
+        "date_of_birth",
     ];
 
     const isValid = requiredFields.every(
@@ -97,7 +97,7 @@ export default function UserForm({ nextStep, position }) {
                         name="firstName"
                         placeholder="First Name"
                         type="text"
-                        value={formData.firstName}
+                        value={formData.first_name}
                         onChange={handleChangeForm}
                     />
                 </div>
@@ -111,7 +111,7 @@ export default function UserForm({ nextStep, position }) {
                         placeholder="Last Name"
                         name="lastName"
                         type="text"
-                        value={formData.lastName}
+                        value={formData.last_name}
                         onChange={handleChangeForm}
                     />
                 </div>
@@ -183,7 +183,7 @@ export default function UserForm({ nextStep, position }) {
                         placeholder="Place Of Birth"
                         name="placeOfBirth"
                         type="text"
-                        value={formData.placeOfBirth}
+                        value={formData.place_of_birth}
                         onChange={handleChangeForm}
                     />
                 </div>
@@ -197,7 +197,7 @@ export default function UserForm({ nextStep, position }) {
                         placeholder="Date Of Birth"
                         name="dateOfBirth"
                         type="date"
-                        value={formData.dateOfBirth}
+                        value={formData.date_of_birth}
                         onChange={handleChangeForm}
                     />
                 </div>

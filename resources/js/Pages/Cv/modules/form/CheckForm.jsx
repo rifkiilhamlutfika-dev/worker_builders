@@ -2,6 +2,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
+import { usePage } from "@inertiajs/react";
 import {
     InstagramIcon,
     LinkedinIcon,
@@ -10,6 +11,7 @@ import {
 } from "lucide-react";
 
 export default function CheckForm() {
+    const { user, summary } = usePage().props;
     return (
         <>
             <h3 className="font-semibold text-xl">Profile</h3>
@@ -22,7 +24,7 @@ export default function CheckForm() {
                         <Input
                             id="firstName"
                             name="firstName"
-                            value={"halo"}
+                            value={user.first_name}
                             disabled
                         />
                     </div>
@@ -35,7 +37,7 @@ export default function CheckForm() {
                             id="lastName"
                             name="lastName"
                             type="text"
-                            value={""}
+                            value={user.last_name}
                             disabled
                         />
                     </div>
@@ -48,7 +50,7 @@ export default function CheckForm() {
                         id="email"
                         name="email"
                         type="email"
-                        value={""}
+                        value={user.email}
                         disabled
                     />
                 </div>
@@ -60,7 +62,7 @@ export default function CheckForm() {
                         id="phone"
                         name="phone"
                         type="text"
-                        value={""}
+                        value={user.phone}
                         disabled
                     />
                 </div>
@@ -74,7 +76,7 @@ export default function CheckForm() {
                             id="city"
                             name="city"
                             type="text"
-                            value={""}
+                            value={user.city}
                             disabled
                         />
                     </div>
@@ -87,7 +89,7 @@ export default function CheckForm() {
                             id="country"
                             name="country"
                             type="text"
-                            value={""}
+                            value={user.country}
                             disabled
                         />
                     </div>
@@ -105,7 +107,7 @@ export default function CheckForm() {
                             id="placeOfBirth"
                             name="placeOfBirth"
                             type="text"
-                            value={""}
+                            value={user.place_of_birth}
                             disabled
                         />
                     </div>
@@ -118,7 +120,7 @@ export default function CheckForm() {
                             id="dateOfBirth"
                             name="dateOfBirth"
                             type="date"
-                            value={""}
+                            value={user.date_of_birth}
                             disabled
                         />
                     </div>
@@ -132,7 +134,7 @@ export default function CheckForm() {
                         id="address"
                         name="address"
                         type="text"
-                        value={""}
+                        value={user.address}
                         disabled
                     ></Textarea>
                 </div>
@@ -145,7 +147,7 @@ export default function CheckForm() {
                         id="gender"
                         name="gender"
                         type="text"
-                        value={""}
+                        value={user.gender}
                         disabled
                     />
                 </div>
@@ -159,7 +161,7 @@ export default function CheckForm() {
                 <Textarea
                     className="mt-5 h-44 w-full"
                     name="summary"
-                    value={""}
+                    value={summary}
                     disabled
                 ></Textarea>
             </div>
@@ -494,8 +496,3 @@ export default function CheckForm() {
         </>
     );
 }
-
-// firstName: user.first_name, lastName: user.last_name, email:
-// user.email, phone: user.phone, gender: user.gender, country:
-// user.country, city: user.city, address: user.address, placeOfBirth:
-// user.place_of_birth, dateOfBirth: user.date_of_birth,
