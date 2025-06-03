@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export default function Summary({ nextStep, position }) {
-    const [summary, setSummary] = useState("");
+    const [summary, setSummary] = useState("adasd");
     const [disabled, setDisabled] = useState(true);
 
     const handleFormSummary = () => {
@@ -14,13 +14,13 @@ export default function Summary({ nextStep, position }) {
 
         try {
             router.post(
-                "/cv-summary-post",
+                "/cv-form/summary-post",
                 { summary: summary },
                 {
                     onSuccess: () => {
                         toast("Okay Next Step");
-                        nextStep(3);
-                        position(3);
+                        nextStep((prev) => prev + 1);
+                        position((prev) => prev + 1);
                     },
                     onError: (error) => {
                         console.log(error);
@@ -41,35 +41,34 @@ export default function Summary({ nextStep, position }) {
     }, [summary]);
 
     const handlePrevForm = () => {
-        position(1);
+        position((prev) => prev - 1);
     };
 
     return (
         <div className="pb-10">
             <h2 className="font-semibold">Summary*</h2>
             <p>Write your summary in briefly, concisely and clearly...</p>
-            <form>
-                <Textarea
-                    placeholder="Write your summery"
-                    className="mt-5 h-44"
-                    name="summary"
-                    value={summary}
-                    onChange={(e) => setSummary(e.target.value)}
-                ></Textarea>
-                <div className="w-full flex justify-between">
-                    <Button className="mt-10 w-1/3" onClick={handlePrevForm}>
-                        <ArrowLeft />
-                        Prev Step
-                    </Button>
-                    <Button
-                        className="mt-10 w-1/3"
-                        disabled={disabled}
-                        onClick={handleFormSummary}
-                    >
-                        Next Step <ArrowRight />
-                    </Button>
-                </div>
-            </form>
+
+            <Textarea
+                placeholder="Write your summery"
+                className="mt-5 h-44 w-full"
+                name="summary"
+                value={summary}
+                onChange={(e) => setSummary(e.target.value)}
+            ></Textarea>
+            <div className="w-full flex justify-between">
+                <Button className="mt-10 w-1/3" onClick={handlePrevForm}>
+                    <ArrowLeft />
+                    Prev Step
+                </Button>
+                <Button
+                    className="mt-10 w-1/3"
+                    disabled={disabled}
+                    onClick={handleFormSummary}
+                >
+                    Next Step <ArrowRight />
+                </Button>
+            </div>
         </div>
     );
 }

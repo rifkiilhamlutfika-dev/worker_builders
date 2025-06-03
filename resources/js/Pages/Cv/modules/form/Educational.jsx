@@ -8,22 +8,23 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const dataObject = {
-    jobTitle: "200",
-    companyName: "asd",
-    start: "2005-09-14",
+    schoolName: "asd",
+    major: "asd",
+    start: "2002",
     end: "",
+    finalScore: 0.0,
     description: "",
 };
 
-export default function Experience({ nextStep, position }) {
+export default function Educational({ nextStep, position }) {
     const [dataForm, setDataForm] = useState([{ ...dataObject }]);
-    const [countDataExperince, setCountDataExperience] = useState(1);
+    const [countDataSchool, setCountDataSchool] = useState(1);
     const [disabled, setDisabled] = useState(false);
 
     useEffect(() => {
-        if (countDataExperince === 1) return;
+        if (countDataSchool === 1) return;
         setDataForm((prev) => [...prev, { ...dataObject }]);
-    }, [countDataExperince]);
+    }, [countDataSchool]);
 
     const handleFormData = (e, index, input) => {
         const allData = [...dataForm];
@@ -36,8 +37,8 @@ export default function Experience({ nextStep, position }) {
 
     const isValid = dataForm.every((data) => {
         return (
-            data.jobTitle.trim() !== "" &&
-            data.companyName.trim() !== "" &&
+            data.schoolName.trim() !== "" &&
+            data.major.trim() !== "" &&
             data.start.trim() !== ""
         );
     });
@@ -51,13 +52,13 @@ export default function Experience({ nextStep, position }) {
         setDisabled(true);
         try {
             router.post(
-                "/cv-form/experience-post",
+                "/cv-form/education-post",
                 { dataForm: dataForm },
                 {
                     onSuccess: () => {
                         toast("next step");
-                        nextStep((prev) => prev + 1);
-                        position((prev) => prev + 1);
+                        nextStep(4);
+                        position(4);
                     },
                     onError: (error) => {
                         console.log(error);
@@ -78,58 +79,61 @@ export default function Experience({ nextStep, position }) {
 
     return (
         <div className="pb-10">
-            <h2 className="font-semibold pb-5">Experiences</h2>
+            <h2 className="font-semibold pb-5">Educational</h2>
 
             {dataForm.map((data, index) => (
-                <div className={index == 0 ? "" : "mt-10"} key={index}>
+                <div key={index} className="mt-5">
                     <div>
-                        <Label htmlFor="jobTitle" className="mb-2">
-                            Job Title
+                        <Label htmlFor="schoolName" className="mb-2">
+                            School Name
                         </Label>
                         <Input
-                            id="jobTitle"
-                            placeholder="Job Title"
-                            type="text"
-                            name="jobTitle"
-                            value={data.jobTitle}
+                            className=""
+                            id="schoolName"
+                            placeholder="School Name"
+                            name="schoolName"
+                            value={data.schoolName}
                             onChange={(e) =>
-                                handleFormData(e, index, "jobTitle")
+                                handleFormData(e, index, "schoolName")
                             }
+                            type="text"
                         />
                     </div>
 
                     <div className="flex items-center pt-3 gap-5">
                         <div className="w-2/3">
-                            <Label htmlFor="companyName" className="mb-2">
-                                Company Name
+                            <Label htmlFor="major" className="mb-2">
+                                Major
                             </Label>
                             <Input
                                 className=""
-                                id="companyName"
-                                placeholder="Company Name"
-                                type="text"
-                                name="companyName"
-                                value={data.companyName}
+                                id="major"
+                                placeholder="Major"
+                                name="major"
+                                value={data.major}
                                 onChange={(e) =>
-                                    handleFormData(e, index, "companyName")
+                                    handleFormData(e, index, "major")
                                 }
+                                type="text"
                             />
                         </div>
                         <div className="w-1/3">
                             <div>
                                 <Label
-                                    htmlFor={`date-experience-start ${index}`}
+                                    htmlFor="years-educational"
                                     className="mb-2"
                                 >
-                                    Date
+                                    Years
                                 </Label>
                                 <div className="flex items-center gap-2 w-full">
                                     <Input
                                         className="w-full"
-                                        id={`date-experience-start ${index}`}
+                                        id="years-educational-start"
                                         placeholder="Start"
-                                        type="date"
-                                        name={`date-experience-start ${index}`}
+                                        min="1900"
+                                        max="2099"
+                                        type="number"
+                                        name="start"
                                         value={data.start}
                                         onChange={(e) =>
                                             handleFormData(e, index, "start")
@@ -138,10 +142,12 @@ export default function Experience({ nextStep, position }) {
                                     -
                                     <Input
                                         className="w-full"
-                                        id="date-experience-end"
+                                        id="years-educational-end"
                                         placeholder="End"
-                                        type="date"
-                                        name="end"
+                                        min="1900"
+                                        max="2099"
+                                        type="number"
+                                        name="start"
                                         value={data.end}
                                         onChange={(e) =>
                                             handleFormData(e, index, "end")
@@ -153,15 +159,33 @@ export default function Experience({ nextStep, position }) {
                     </div>
 
                     <div className="pt-3">
+                        <Label htmlFor="finalScore" className="mb-2">
+                            Final Score
+                        </Label>
+                        <Input
+                            className=""
+                            id="finalScore"
+                            placeholder="Final Score"
+                            min="0.0"
+                            type="number"
+                            name="finalScore"
+                            value={data.finalScore}
+                            onChange={(e) =>
+                                handleFormData(e, index, "finalScore")
+                            }
+                        />
+                    </div>
+
+                    <div className="pt-3">
                         <Label htmlFor="description-education" className="mb-2">
                             Description
                         </Label>
                         <Textarea
-                            className="min-h-28"
+                            className="min-h-28 w-full"
                             id="description-education"
                             placeholder="Tell your description when you in study.."
                             min="0"
-                            type="text"
+                            type="number"
                             name="description"
                             value={data.description}
                             onChange={(e) =>
@@ -175,9 +199,9 @@ export default function Experience({ nextStep, position }) {
             <div className="w-full flex justify-end">
                 <Button
                     className="bg-transparent mb-3 text-xs p-0 hover:bg-transparent text-black shadow-transparent hover:text-blue-400 duration-300"
-                    onClick={() => setCountDataExperience((prev) => prev + 1)}
+                    onClick={() => setCountDataSchool((prev) => prev + 1)}
                 >
-                    Add Experience +
+                    Add School +
                 </Button>
             </div>
 
@@ -189,6 +213,7 @@ export default function Experience({ nextStep, position }) {
                 <Button
                     className="mt-10 w-1/3"
                     disabled={disabled}
+                    type="submit"
                     onClick={handleSubmit}
                 >
                     Next Step <ArrowRight />

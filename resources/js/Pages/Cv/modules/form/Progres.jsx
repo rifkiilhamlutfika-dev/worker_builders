@@ -48,8 +48,9 @@ export default function Progres({ setPosition, dataProgres, position }) {
                                     : ""
                                 : ""
                         }`}
-                        onClick={() => setPosition(1)}
-                        disabled={dataProgres < data.number}
+                        onClick={() => setPosition(8)}
+                        // onClick={() => setPosition(index + 1)}
+                        // disabled={dataProgres < data.number}
                     >
                         {data.number}
                     </Button>

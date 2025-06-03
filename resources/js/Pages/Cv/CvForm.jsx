@@ -1,14 +1,14 @@
+import { useState } from "react";
 import PageLayout from "@/components/modules/PageLayout";
 import UserForm from "./modules/form/UserForm";
 import Progres from "./modules/form/Progres";
-import { useState } from "react";
-import AboutMe from "./modules/form/Summary";
-import Educational from "./modules/form/EducationalForm";
+import Educational from "./modules/form/Educational";
 import Experience from "./modules/form/Experience";
 import Skill from "./modules/form/Skill";
 import SocialMedia from "./modules/form/SocialMedia";
 import CourseTraining from "./modules/form/CourseTraining";
 import Summary from "./modules/form/Summary";
+import CheckForm from "./modules/form/CheckForm";
 
 export default function CvForm() {
     const [progres, setProgres] = useState(1);
@@ -31,11 +31,19 @@ export default function CvForm() {
             {position == 3 && (
                 <Educational nextStep={setProgres} position={setPosition} />
             )}
-            {position == 4 && <Experience />}
-            {position == 5 && <Skill />}
-            {position == 6 && <CourseTraining />}
-            {position == 7 && <SocialMedia />}
-            {position == 8 && <UserForm />}
+            {position == 4 && (
+                <Experience nextStep={setProgres} position={setPosition} />
+            )}
+            {position == 5 && (
+                <Skill nextStep={setProgres} position={setPosition} />
+            )}
+            {position == 6 && (
+                <CourseTraining nextStep={setProgres} position={setPosition} />
+            )}
+            {position == 7 && (
+                <SocialMedia nextStep={setProgres} position={setPosition} />
+            )}
+            {position == 8 && <CheckForm />}
         </PageLayout>
     );
 }

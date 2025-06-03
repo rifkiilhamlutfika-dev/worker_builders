@@ -85,21 +85,99 @@ class CvController extends Controller
         return back();
     }
 
-    public function educationalForm(Request $request)
+    public function educationForm(Request $request)
     {
-
         $validate = Validator::make($request->all(), [
-            'summary' => 'required|string',
+            "dataForm" => "array",
+            "dataForm.*.schoolName" => "required|string|max:255",
+            "dataForm.*.major" => "required|string|max:255",
+            "dataForm.*.start" => "required|string|max:4",
+            "dataForm.*.end" => "string|nullable|max:4",
+            "dataForm.*.finalScore" => "integer|nullable",
+            "dataForm.*.description" => "string|nullable",
         ]);
 
-        if ($validate->fails()) {
-            return back()->withErrors($validate)->withInput();
-        }
+        if ($validate->fails()) return back()->withErrors($validate)->withInput();
 
         session([
-            'form_cv_summary' => $request->summary
+            'form_cv_education' => $request->all()
         ]);
 
-        return back();
+        return back()->with('succes', true);
+    }
+
+    public function experinceForm(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            "dataForm" => "array|required",
+            "dataForm.*.jobTitle" => "required|string|max:255",
+            "dataForm.*.companyName" => "required|string|max:255",
+            "dataForm.*.start" => "required|string|date",
+            "dataForm.*.end" => "string|nullable|date",
+            "dataForm.*.description" => "string|nullable",
+        ]);
+
+        if ($validate->fails()) return back()->withErrors($validate)->withInput();
+
+        session([
+            'form_cv_experince' => $request->all()
+        ]);
+
+        return back()->with('succes', true);
+    }
+
+    public function skillForm(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            "dataForm" => "array|required",
+            "dataForm.*.skillName" => "required|string|max:255",
+            "dataForm.*.level" => "required|string|max:255"
+        ]);
+
+        if ($validate->fails()) return back()->withErrors($validate)->withInput();
+
+        session([
+            'form_cv_skill' => $request->all()
+        ]);
+
+        return back()->with('succes', true);
+    }
+
+    public function courseTrainingForm(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            "dataForm" => "array|required",
+            "dataForm.*.certificateName" => "required|string|max:255",
+            "dataForm.*.organizerName" => "required|string|max:255",
+            "dataForm.*.start" => "required|string|date",
+            "dataForm.*.end" => "string|nullable|date",
+            "dataForm.*.description" => "string|nullable",
+        ]);
+
+        if ($validate->fails()) return back()->withErrors($validate)->withInput();
+
+        session([
+            'form_cv_course_training' => $request->all()
+        ]);
+
+        return back()->with('succes', true);
+    }
+
+    public function socialMediaForm(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            "github" => "nullable|string|max:255",
+            "linkedin" => "nullable|string|max:255",
+            "instagram" => "nullable|string|max:255",
+            "youtube" => "nullable|string|max:255",
+        ]);
+
+        if ($validate->fails()) return back()->withErrors($validate)->withInput();
+
+        session([
+            'form_cv_social_media' => $request->all()
+        ]);
+
+        return back()->with('succes', true);
     }
 }

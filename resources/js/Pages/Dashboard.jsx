@@ -39,7 +39,7 @@ export default function Dashboard() {
                             <Button
                                 variant="outline"
                                 className="h-28 w-full sm:w-48"
-                                onClick={() => Inertia.visit("cv-form")}
+                                onClick={() => Inertia.visit("/cv-form")}
                             >
                                 CV
                             </Button>
