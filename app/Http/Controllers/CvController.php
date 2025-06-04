@@ -14,18 +14,6 @@ class CvController extends Controller
     {
         $user = session('form_cv_user');
         $userData = User::first();
-        // $user = $userData->only(
-        //     'first_name',
-        //     'last_name',
-        //     'email',
-        //     'phone',
-        //     'address',
-        //     'gender',
-        //     'country',
-        //     'city',
-        //     'place_of_birth',
-        //     'date_of_birth'
-        // );
 
         if (session('form_cv_user') == null) {
             $user = $userData->only(
